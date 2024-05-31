@@ -19,3 +19,9 @@ p, h2 {
     height: 200px;
     object-fit: cover;
 }
+
+.card .card-action {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}

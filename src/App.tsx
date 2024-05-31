@@ -10,21 +10,39 @@ function App() {
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
-  }
+  };
 
   return (
     <div className="container">
-      <h1>Cardápio</h1>
-      {isModalOpen && <Modal closeModal={handleModal}/>}
-      <button onClick={handleModal}>Novo</button>
+      <div className="header">
+        <h1>Cardápio de Comidas</h1>
+        {isModalOpen && (
+          <Modal
+            typeModal="POST"
+            _id={0}
+            _title=""
+            _price={0}
+            _image=""
+            closeModal={handleModal}
+          />
+        )}
+        <div>
+          <button className="btn-novo" onClick={handleModal}>
+            Nova Comida
+          </button>
+        </div>
+      </div>
       {/* <hr /> */}
       <div className="card-grid">
         {data?.map((data) => (
-          <Card 
+          <Card
             key={data.id}
-            title={data.title} 
-            price={data.price} 
-            image={data.image} />
+            id={data.id}
+            title={data.title}
+            price={data.price}
+            image={data.image}
+            closeModal={handleModal}
+          />
         ))}
       </div>
     </div>
