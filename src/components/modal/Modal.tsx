@@ -43,8 +43,15 @@ function Modal({
   const [price, setPrice] = useState(_price);
   const [image, setImage] = useState(_image);
   let method = "POST";
-  typeModal === "POST"? method = "POST": method = "PUT";
-  
+
+  if (typeModal === "POST") {
+    method = "POST";
+  } else if (typeModal === "PUT") {
+    method = "PUT";
+  } else {
+    method = "DELETE";
+  }
+
   const { mutate, isSuccess } = useFoodDataMutate(method);
 
   const submitClick = () => {

@@ -68,3 +68,13 @@
     gap: 1rem;
     width: 100%;
 }
+
+.card-delete {
+    display: flex;
+    column-gap: 1rem;
+}
+
+.card-description-price {
+    display: flex;
+    flex-direction: column;
+}

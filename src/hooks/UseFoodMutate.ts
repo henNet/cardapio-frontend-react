@@ -1,6 +1,6 @@
 import axios, { AxiosPromise } from "axios";
 import FoodData from "../interface/FoodData";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const API_URL = "http://localhost:8080/food";
 
@@ -14,11 +14,22 @@ const putData = async (data: FoodData): AxiosPromise<any> => {
     return response;
 }
 
+const deleteData = async (data: FoodData): AxiosPromise<any> => {
+    const response = axios.delete(API_URL + `/${data.id}`);
+    return response;
+}
+
 function useFoodDataMutate(method: string){
     const queryCliente = useQueryClient();
 
     let mtFn = undefined;
-    method === "POST"? mtFn = postData: mtFn = putData;
+    if(method === "POST"){
+        mtFn = postData
+    }else if(method === "PUT"){
+        mtFn = putData;
+    }else{
+        mtFn = deleteData;
+    }
 
     const mutate = useMutation({
         mutationFn: mtFn,

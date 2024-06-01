@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./card.css";
 import Modal from "../modal/Modal";
+import ModalConfirm from "../modal/ModalConfirm";
 
 interface CardProps {
   id: number | undefined;
@@ -10,11 +11,16 @@ interface CardProps {
   closeModal(): void;
 }
 
-function Card({id, price, title, image, closeModal }: CardProps) {
+function Card({ id, price, title, image }: CardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModaConfirmOpen, setModaConfirmOpen] = useState(false);
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const handleModalConfirm = () => {
+    setModaConfirmOpen(!isModaConfirmOpen);
   };
 
   return (
@@ -36,7 +42,16 @@ function Card({id, price, title, image, closeModal }: CardProps) {
             closeModal={handleModal}
           />
         )}
-        <button>Excluir</button>
+        <button onClick={handleModalConfirm}>Excluir</button>
+        {isModaConfirmOpen && (
+          <ModalConfirm
+            _id={id}
+            _title={title}
+            _price={price}
+            _image={image}
+            closeModal={handleModalConfirm}
+          />
+        )}
       </div>
     </div>
   );
