@@ -36,7 +36,7 @@ function useFoodDataMutate(method: string){
         mutationFn: mtFn,
         retry: 2,
         onSuccess: () => {
-            queryCliente.invalidateQueries(['food-data'])
+            queryCliente.invalidateQueries({queryKey:['food-data']})
         }
     })
 
